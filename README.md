@@ -29,6 +29,8 @@ https://olegnax.com/product/google-maps-widget-for-magento-2/
 
 ## Installation and Configuration
 
+``Composer: composer require olegnax/module-googlemap``
+
 https://olegnax.com/documentation/google-maps-widget-for-magento-2/
 
 
