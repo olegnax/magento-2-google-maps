@@ -25,6 +25,7 @@ define([
                     mapTypeIds: []
                 }
             },
+            styles: [],
             locations: [],
         },
         _create: function () {
@@ -48,8 +49,18 @@ define([
         },
         CreateMap: function () {
             this.element.html('');
+            let config = this._mapConfig();
             // noinspection JSCheckFunctionSignatures,JSUnresolvedVariable,AmdModulesDependencies
-            this.map = new google.maps.Map(this.element[0], this._mapConfig());
+            this.map = new google.maps.Map(this.element[0], config);
+            // noinspection JSUnresolvedFunction,JSUnresolvedVariable,AmdModulesDependencies
+            if (Array.isArray(this.options.styles) && 0 < this.options.styles.length) {
+                // noinspection JSUnresolvedFunction,JSUnresolvedVariable,AmdModulesDependencies
+                let styledMapType = new google.maps.StyledMapType(this.options.styles);
+                // noinspection JSUnresolvedVariable
+                this.map.mapTypes.set("styled_map", styledMapType);
+                // noinspection JSUnresolvedFunction
+                this.map.setMapTypeId("styled_map");
+            }
             // noinspection JSUnresolvedFunction,JSUnresolvedVariable,AmdModulesDependencies
             this.infoWindows = new google.maps.InfoWindow();
             this.ReloadMarkers();
@@ -90,7 +101,8 @@ define([
                 let marker = _self.markers[i];
                 _self.map.panTo(this.getPosition());
                 // noinspection JSUnresolvedFunction
-                if (_self.options.zoom_closer && _self.options.zoom_closer != _self.options.zoom) {
+                if (_self.options.zoom_closer && _self.options.zoom_closer !== _self.options.zoom) {
+                    // noinspection JSUnresolvedFunction
                     _self.map.setZoom(_self.options.zoom_closer);
                 }
                 if (_self.options.locations[i].description) {
@@ -182,7 +194,7 @@ define([
                     s.type = "text/javascript";
                     s.async = true;
                     s.defer = true;
-                    s.src = "https://maps.googleapis.com/maps/api/js?key=" + this.apiKey + "&callback=" + this.funcInit;
+                    s.src = "https://maps.googleapis.com/maps/api/js?key=" + this.apiKey + "&language=en&callback=" + this.funcInit;
                     window.document.body.append(s);
                 };
                 this.Run = function () {

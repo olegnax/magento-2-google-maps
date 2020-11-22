@@ -22,19 +22,19 @@ $markerSize = 70;
 $markerSize*=$markerScale;
 $innerScale = 0.7;
 $markerRadius = $markerSize / 2;
-$markerInnerRarius = (($markerSize*$innerScale)/2);
+$markerInnerRadius = (($markerSize*$innerScale)/2);
 $imagePosition = ($markerSize-($markerSize*$innerScale))/2;
 $image = $block->getData('widgetBlock')->contentLocalImage(DataLocation::MARKER_IMAGE, $location);
 ?>
 <svg preserveaspectratio="xMidYMid meet" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="<?= $viewBox ?>"> 
 <circle class="ox-marker-shape" cx="<?= $markerRadius ?>" cy="<?= $markerRadius ?>" r="<?= $markerRadius ?>" fill="<?= $location->getMarkerColor1() ?>" />
-<circle class="ox-marker-inner" cx="<?= $markerRadius ?>" cy="<?= $markerRadius ?>" r="<?= $markerInnerRarius ?>" fill="<?= $location->getMarkerColor2() ?>" />
+<circle class="ox-marker-inner" cx="<?= $markerRadius ?>" cy="<?= $markerRadius ?>" r="<?= $markerInnerRadius ?>" fill="<?= $location->getMarkerColor2() ?>" />
 <?php if ($image): ?>
 	<defs>
 		<clipPath id="oxImageMask">
-			<circle cx="<?= $markerSize/2 ?>" cy="<?= $markerSize/2 ?>" r="<?= $markerInnerRarius ?>" fill="<?= $location->getMarkerColor2() ?>" />            
+			<circle cx="<?= $markerSize/2 ?>" cy="<?= $markerSize/2 ?>" r="<?= $markerInnerRadius ?>" fill="<?= $location->getMarkerColor2() ?>" />
 		</clipPath>
 	</defs>
-	<image width="<?= $markerSize*$innerScale ?>" height="<?= $markerSize*$innerScale ?>" x="<?= $imagePosition ?>" y="<?= $imagePosition  ?>" xlink:href="data:image/jpeg;base64,<?= base64_encode($image) ?>" clip-path="url(#oxImageMask)" />
+	<image width="<?= $markerSize*$innerScale ?>" height="<?= $markerSize*$innerScale ?>" x="<?= $imagePosition ?>" y="<?= $imagePosition  ?>" xlink:href="<?= $image ?>" clip-path="url(#oxImageMask)" />
 <?php endif; ?>
 </svg>

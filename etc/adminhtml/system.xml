@@ -216,6 +216,18 @@
 						<field id="general/enabled">1</field>
 					</depends>
 				</field>
+				<field id="map_style" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="200" translate="label" type="select">
+					<label>Map Style</label>
+					<source_model>Olegnax\GoogleMap\Model\Config\Source\MapStyle</source_model>
+				</field>
+				<field id="custom_json" translate="label comment" type="textarea" sortOrder="201"
+					   showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Custom map JSON</label>
+					<depends>
+						<field id="map_style">custom</field>
+					</depends>
+					<comment>Add your custom JSON code here.</comment>
+				</field>
 			</group>
 		</section>
 	</system>

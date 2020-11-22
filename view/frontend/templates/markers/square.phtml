@@ -35,6 +35,6 @@ $image = $block->getData('widgetBlock')->contentLocalImage(DataLocation::MARKER_
 				<rect x="<?= $innerPosition ?>" y="<?= $innerPosition ?>" width="<?= $markerSize*$innerScale ?>" height="<?= $markerSize*$innerScale ?>" fill="<?= $location->getMarkerColor2() ?>" transform="scale(<?= $markerScale ?>)"/>        
 			</clipPath>
 		</defs>
-		<image width="<?= $imageScaled ?>" height="<?= $imageScaled ?>" x="<?= $innerPosition*$markerScale ?>" y="<?= $innerPosition*$markerScale ?>" xlink:href="data:image/jpeg;base64,<?=  base64_encode($image) ?>" clip-path="url(#oxImageMask)" />
+		<image width="<?= $imageScaled ?>" height="<?= $imageScaled ?>" x="<?= $innerPosition*$markerScale ?>" y="<?= $innerPosition*$markerScale ?>" xlink:href="<?= $image ?>" clip-path="url(#oxImageMask)" />
 	<?php endif; ?>
 </svg>

@@ -10,6 +10,8 @@ declare(strict_types=1);
 namespace Olegnax\GoogleMap\Block\Widget;
 
 use Exception;
+use finfo;
+use InvalidArgumentException;
 use Magento\Framework\App\Http\Context;
 use Magento\Framework\App\ObjectManager;
 use Magento\Framework\Escaper;
@@ -23,6 +25,7 @@ use Magento\Widget\Block\BlockInterface;
 use Olegnax\GoogleMap\Helper\Cache;
 use Olegnax\GoogleMap\Helper\Helper;
 use Olegnax\GoogleMap\Model\Config\Source\MarkerStyle;
+use Olegnax\GoogleMap\Model\Config\Source\MapStyle;
 use Olegnax\GoogleMap\Model\Data\Location as DataLocation;
 use Olegnax\GoogleMap\Model\Location;
 use Olegnax\GoogleMap\Model\ResourceModel\Location\Collection;
@@ -231,11 +234,12 @@ class GoogleMap extends Template implements BlockInterface
             ],
             'map' => [],
             'locations' => [],
+            'styles' => $this->getMapStyles($storeCode),
         ];
 
         $config['map'] = [
             'zoom' => (int)$this->getConfig('zoom', $storeCode, 7),
-			'zoom_closer' => (int)$this->getConfig('zoom_closer', $storeCode, 7),
+            'zoom_closer' => (int)$this->getConfig('zoom_closer', $storeCode, 7),
             'center' => [
                 'lat' => $this->getConfig('latitude', $storeCode)
                     ? (float)$this->getConfig('latitude', $storeCode)
@@ -250,8 +254,11 @@ class GoogleMap extends Template implements BlockInterface
                 'mapTypeIds' => [],
             ],
         ];
-        $locations = trim($this->getData('locations'));
-        if (empty($locations)){
+		$locations = null;
+		if($this->getData('locations')){
+			$locations = trim($this->getData('locations'));
+		}
+        if (empty($locations)) {
             $locations = $this->helper->getModuleConfig('general/locations', $storeCode);
         }
 
@@ -308,6 +315,34 @@ class GoogleMap extends Template implements BlockInterface
     }
 
     /**
+     * @param null|int|StoreInterface $storeCode
+     * @return array
+     */
+    protected function getMapStyles($storeCode = null)
+    {
+        $value = $this->getData('custom_css');		
+        if (null === $value) {
+			$map_style = $this->helper->getModuleConfig('appearance/map_style', $storeCode);
+			if($map_style === MapStyle::TYPE_CUSTOM){
+				$value = $this->helper->getModuleConfig('appearance/custom_json', $storeCode);
+			} else {
+				$value = $map_style;
+			}
+        }
+        if (null === $value) {
+            $value = '[]';
+        }
+        try {
+            $array = $this->json->unserialize($value);
+        } catch (InvalidArgumentException $exception) {
+            $this->_logger->warning(__('OX Google Map Widget Style error: ') . $exception->getMessage());
+            $array = [];
+        }
+
+        return $array;
+    }
+
+    /**
      * @param string|array $locations
      * @param null|int|StoreInterface $store
      * @return Collection
@@ -317,6 +352,7 @@ class GoogleMap extends Template implements BlockInterface
     {
         if (!is_array($locations)) {
             $locations = explode(',', $locations ?: '');
+            /** @noinspection SpellCheckingInspection */
             $locations = array_map('intval', $locations);
             $locations = array_map('abs', $locations);
             $locations = array_filter($locations);
@@ -458,7 +494,7 @@ class GoogleMap extends Template implements BlockInterface
             ->toHtml();
         unset($icon['template']);
         $icon['html'] = trim($icon['html']);
-        
+
         return $icon;
     }
 
@@ -470,17 +506,25 @@ class GoogleMap extends Template implements BlockInterface
     public function contentLocalImage($data, Location $location)
     {
         $imageUrl = $this->prepareLocalImage(['data' => $data], $location);
-        $imageData = '';
+        $imageEncoded = '';
         if (!empty($imageUrl)) {
             try {
                 $imageData = file_get_contents($imageUrl);
+                if (empty($imageData)) {
+                    throw new Exception('No data received: ' . $imageUrl);
+                }
+                $fInfo = new finfo(FILEINFO_MIME);
+                $fInfoMime = $fInfo->buffer($imageData);
+                [$mime, $charset] = explode('; ', $fInfoMime);
+                $imageDataEncoded = base64_encode($imageData);
+                $imageEncoded = sprintf('data:%s;base64,%s', $mime, $imageDataEncoded);
             } catch (Exception $exception) {
                 $this->_logger->error('Google Map: ' . $exception->getMessage());
-                $imageData = '';
+                $imageEncoded = '';
             }
         }
 
-        return $imageData;
+        return $imageEncoded;
     }
 
     /**

@@ -30,6 +30,8 @@
 				<popup_bottom_arrow_hide></popup_bottom_arrow_hide>
 				<popup_close_btn_bg></popup_close_btn_bg>
 				<popup_close_btn_invert></popup_close_btn_invert>
+                                <map_style></map_style>
+				<custom_json></custom_json>
 			</appearance>
 		</olegnax_googlemaps>
 	</default>
