@@ -1,0 +1,21 @@
+<?xml version="1.0" ?>
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+	<table comment="olegnax_googlemap_location Table" engine="innodb" name="olegnax_googlemap_location" resource="default">
+		<column comment="Entity Id" identity="true" name="location_id" nullable="false" padding="6" unsigned="true" xsi:type="smallint"/>
+		<constraint referenceId="PRIMARY" xsi:type="primary">
+			<column name="location_id"/>
+		</constraint>
+		<column name="name" nullable="true" xsi:type="text"/>
+		<column name="status" nullable="true" xsi:type="boolean"/>
+		<column name="store_id" nullable="true" xsi:type="text"/>
+		<column name="latitude" nullable="true" precision="12" scale="6" xsi:type="decimal"/>
+		<column name="longitude" nullable="true" precision="12" scale="6" xsi:type="decimal"/>
+		<column name="marker_style" nullable="true" xsi:type="text"/>
+		<column name="marker_color_1" nullable="true" xsi:type="text"/>
+		<column name="marker_color_2" nullable="true" xsi:type="text"/>
+		<column name="marker_size" nullable="true" precision="3" scale="2" xsi:type="decimal"/>
+		<column name="marker_shadow_color" nullable="true" xsi:type="text"/>
+		<column name="marker_image" nullable="true" xsi:type="text"/>
+		<column name="description" nullable="true" xsi:type="text"/>
+	</table>
+</schema>

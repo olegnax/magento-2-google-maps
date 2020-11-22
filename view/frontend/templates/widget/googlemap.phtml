@@ -1,0 +1,25 @@
+<?php
+/**
+ * Olegnax GoogleMap Widget
+ *
+ * @author      Olegnax
+ * @package     Olegnax_GoogleMap
+ * @copyright   Copyright (c) 2020 Olegnax (http://olegnax.com/). All rights reserved.
+ * See COPYING.txt for license details.
+ * @noinspection PhpUnhandledExceptionInspection
+ */
+declare(strict_types=1);
+
+use Magento\Framework\Escaper;
+use Olegnax\GoogleMap\Block\Widget\GoogleMap;
+
+/** @var GoogleMap $block */
+/** @var Escaper $escaper */
+if ($block->isEnabled()):
+    $widgetId = $block->getMapId();
+    echo $block->getStyle($widgetId);
+    ?>
+	<div id="<?= $escaper->escapeHtmlAttr($widgetId); ?>" class="ox-gmap-wrapper" data-role="ox-google-map"
+		 data-mage-init='{"OXGoogleMap":<?=
+         $block->getWidgetConfig() ?>}'></div>
+<?php endif;

@@ -1,0 +1,29 @@
+<?php
+/**
+ * @author      Olegnax
+ * @package     Olegnax_GoogleMap
+ * @copyright   Copyright (c) 2020 Olegnax (http://olegnax.com/). All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+use Magento\Framework\Escaper;
+use Magento\Framework\View\Element\Template;
+use Olegnax\GoogleMap\Model\Location;
+
+/** @var Template $block */
+/** @var Escaper $escaper */
+/** @var array $icon */
+/** @var Location $location */
+
+$viewBox = '0 0 ' . implode(' ', $icon['scaledSize']);
+$markerScale = $location->getMarkerSize();
+?>
+
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+	 viewBox="<?= $viewBox ?>" xml:space="preserve">
+    <ellipse cx="18" cy="49" rx="12" ry="2" fill="<?= $location->getMarkerShadowColor() ?>"
+			 transform="scale(<?= $markerScale ?>)"/>
+	<path d="M18,50L18,50c-1.1,0-2-0.9-2-2V18c0-1.1,0.9-2,2-2h0c1.1,0,2,0.9,2,2v30C20,49.1,19.1,50,18,50z"
+		  fill="<?= $location->getMarkerColor1() ?>" transform="scale(<?= $markerScale ?>)"/>
+	<circle cx="18" cy="15" r="15" fill="<?= $location->getMarkerColor2() ?>" transform="scale(<?= $markerScale ?>)"/>
+</svg>

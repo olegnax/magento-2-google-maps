@@ -1,0 +1,222 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+	<system>
+		<tab id="olegnax" sortOrder="999" translate="label">
+			<label>Olegnax</label>
+		</tab>
+		<section id="olegnax_googlemaps" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="10" translate="label">
+			<label>Google Map</label>
+			<tab>olegnax</tab>
+			<resource>Olegnax_GoogleMap::config_olegnax_googlemap</resource>
+			<group id="info" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="1" translate="label">
+				<frontend_model>Olegnax\GoogleMap\Block\Adminhtml\System\Config\Form\Info</frontend_model>
+			</group>
+			<group id="general" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="20" translate="label">
+				<label>General</label>
+				<field id="enabled" translate="label" type="select" sortOrder="10" showInDefault="1"
+					   showInWebsite="1" showInStore="1">
+					<label>Enable</label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+					<frontend_class>on-off-trigger</frontend_class>
+				</field>
+				<field id="google_api_key" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="20" translate="label comment" type="text">
+					<label>Google Map Api Key</label>
+					<comment><![CDATA[<a href="https://developers.google.com/maps/documentation/javascript/get-api-key" target="_blank">Where to get Map Api key?</a>]]></comment>
+					<depends>
+						<field id="enabled">1</field>
+					</depends>
+				</field>
+				<field id="locations" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="22"
+					   translate="label" type="multiselect">
+					<label>Locations</label>
+					<source_model>Olegnax\GoogleMap\Model\Config\Source\Location</source_model>
+					<depends>
+						<field id="enabled">1</field>
+					</depends>
+				</field>
+				<field id="latitude" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="31" translate="label" type="text">
+					<label>Map Center Latitude</label>
+					<validate>validate-number</validate>
+					<comment>Set center position of map. If empty, center will be calculated as the average point of
+						selected locations on map points.
+					</comment>
+					<depends>
+						<field id="enabled">1</field>
+					</depends>
+				</field>
+				<field id="longitude" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="32" translate="label" type="text">
+					<label>Map Center Longitude</label>
+					<validate>validate-number</validate>
+					<comment>Set center position of map. If empty, center will be calculated as the average point of
+						selected locations on map points.
+					</comment>
+					<depends>
+						<field id="enabled">1</field>
+					</depends>
+				</field>
+				<field id="height" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="41" translate="label" type="text">
+					<label>Map Height</label>
+					<validate>validate-digits validate-zero-or-greater</validate>
+					<comment>Number only.</comment>
+					<depends>
+						<field id="enabled">1</field>
+					</depends>
+				</field>
+				<field id="height_tablet" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="42" translate="label" type="text">
+					<label>Map Height Tablet</label>
+					<validate>validate-digits validate-zero-or-greater</validate>
+					<comment>Number only. Below 1024px.</comment>
+					<depends>
+						<field id="enabled">1</field>
+					</depends>
+				</field>
+				<field id="height_mobile" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="43" translate="label" type="text">
+					<label>Map Height Mobile</label>
+					<validate>validate-digits validate-zero-or-greater</validate>
+					<comment>Number only. Below 768px (This can be changed using Mobile Breakpoint option below)
+					</comment>
+					<depends>
+						<field id="enabled">1</field>
+					</depends>
+				</field>
+				<field id="zoom" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="50" translate="label" type="text">
+					<label>Zoom</label>
+					<validate>validate-digits validate-zero-or-greater</validate>
+					<depends>
+						<field id="enabled">1</field>
+					</depends>
+				</field>
+				<field id="zoom_mobile" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="60" translate="label" type="text">
+					<label>Zoom on Mobile</label>
+					<depends>
+						<field id="enabled">1</field>
+					</depends>
+					<validate>validate-digits validate-zero-or-greater</validate>
+					<comment>Below 768px (This can be changed using Mobile Breakpoint option below)</comment>
+				</field>
+				<field id="zoom_closer" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="70" translate="label" type="text">
+					<label>Zoom on Marker Click</label>
+					<validate>validate-digits validate-zero-or-greater</validate>
+					<depends>
+						<field id="enabled">1</field>
+					</depends>
+				</field>
+				<field id="map_type" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="90" translate="label" type="select">
+					<label>Map Type</label>
+					<comment/>
+					<source_model>Olegnax\GoogleMap\Model\Config\Source\MapType</source_model>
+					<depends>
+						<field id="enabled">1</field>
+					</depends>
+				</field>
+				<field id="street_view" translate="label" type="select" sortOrder="100" showInDefault="1"
+					   showInWebsite="1" showInStore="1">
+					<label>Street View Controls</label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+					<frontend_class>on-off-trigger</frontend_class>
+					<depends>
+						<field id="enabled">1</field>
+					</depends>
+				</field>
+				<field id="mobile_breakpoint" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="900" translate="label" type="text">
+					<label>Mobile Breakpoint</label>
+					<comment>Number only. Default is 768.</comment>
+					<validate>validate-digits validate-zero-or-greater</validate>
+					<depends>
+						<field id="enabled">1</field>
+					</depends>
+				</field>
+
+			</group>
+			<group id="appearance" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="30" translate="label">
+				<label>Appearance</label>
+				<field id="custom_styles" translate="label comment" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Enable Appearance Styles</label>
+					<comment>Enable to access extension color and style options. If disabled default/theme styles will
+						be used.
+					</comment>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+					<frontend_class>on-off-trigger</frontend_class>
+					<depends>
+						<field id="general/enabled">1</field>
+					</depends>
+				</field>
+				<field id="popup_max_width" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Popup Max Width</label>
+					<depends>
+						<field id="custom_styles">1</field>
+						<field id="general/enabled">1</field>
+					</depends>
+					<comment>This options is to make popup smaller than google default popup width only.</comment>
+				</field>
+				<field id="popup_background" translate="label" type="text" sortOrder="22" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Popup Background Color</label>
+					<frontend_class>ox-ss-colorpicker</frontend_class>
+					<depends>
+						<field id="custom_styles">1</field>
+						<field id="general/enabled">1</field>
+					</depends>
+				</field>
+				<field id="popup_color" translate="label" type="text" sortOrder="24" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Popup Text Color</label>
+					<frontend_class>ox-ss-colorpicker</frontend_class>
+					<depends>
+						<field id="custom_styles">1</field>
+						<field id="general/enabled">1</field>
+					</depends>
+				</field>
+				<field id="popup_border_radius" translate="label" type="text" sortOrder="26" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Popup Border Radius</label>
+					<depends>
+						<field id="custom_styles">1</field>
+						<field id="general/enabled">1</field>
+					</depends>
+				</field>
+				<field id="popup_shadow" translate="label comment" type="text" sortOrder="27" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Popup Shadow Params</label>
+					<comment><![CDATA[Default Shadow: 0 2px 7px 1px; Big Shadow: 0 22px 37px -3px. Medium Shadow: 0 12px 17px -4px. Sharp Shadow: 3px 5px 0 0 <a href="https://developer.mozilla.org/ru/docs/Web/CSS/box-shadow" target="_blank">See box-shadow for details.</a>]]></comment>
+					<depends>
+						<field id="custom_styles">1</field>
+						<field id="general/enabled">1</field>
+					</depends>
+				</field>
+				<field id="popup_shadow_color" translate="label" type="text" sortOrder="28" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Popup Shadow Color</label>
+					<frontend_class>ox-ss-colorpicker</frontend_class>
+					<depends>
+						<field id="custom_styles">1</field>
+						<field id="general/enabled">1</field>
+					</depends>
+				</field>
+				<field id="popup_bottom_arrow_hide" translate="label" type="select" sortOrder="29" showInDefault="1"
+					   showInWebsite="1" showInStore="1">
+					<label>Hide Popup Bottom Arrow</label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+					<frontend_class>on-off-trigger</frontend_class>
+					<depends>
+						<field id="custom_styles">1</field>
+						<field id="general/enabled">1</field>
+					</depends>
+				</field>
+				<field id="popup_close_btn_bg" translate="label" type="text" sortOrder="41" showInDefault="1" showInWebsite="1" showInStore="1">
+					<label>Popup Close Button Background</label>
+					<frontend_class>ox-ss-colorpicker</frontend_class>
+					<depends>
+						<field id="custom_styles">1</field>
+						<field id="general/enabled">1</field>
+					</depends>
+				</field>
+				<field id="popup_close_btn_invert" translate="label" type="select" sortOrder="42" showInDefault="1"
+					   showInWebsite="1" showInStore="1">
+					<label>Popup Close Button, Invert Icons color</label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+					<frontend_class>on-off-trigger</frontend_class>
+					<depends>
+						<field id="custom_styles">1</field>
+						<field id="general/enabled">1</field>
+					</depends>
+				</field>
+			</group>
+		</section>
+	</system>
+</config>

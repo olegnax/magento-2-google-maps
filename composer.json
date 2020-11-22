@@ -1,0 +1,29 @@
+{
+  "name": "olegnax/module-googlemap",
+  "description": "Easily add google map anywhere on your Magento 2 store",
+  "type": "magento2-module",
+  "version": "1.0.0",
+  "license": [
+      "OSL-3.0",
+      "AFL-3.0"
+  ],
+  "authors": [
+	{
+	  "name": "Olegnax",
+	  "email": "mail@olegnax.com",
+	  "homepage": "https://olegnax.com",
+	  "role": "Technical Support"
+	}
+  ],
+  "require": {
+	"olegnax/module-core": ">=1.1.1.0"
+  },
+  "autoload": {
+	"psr-4": {
+	  "Olegnax\\GoogleMap\\": ""
+	},
+	"files": [
+	  "registration.php"
+	]
+  }
+}

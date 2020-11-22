@@ -1,0 +1,40 @@
+<?php
+/**
+ * @author      Olegnax
+ * @package     Olegnax_GoogleMap
+ * @copyright   Copyright (c) 2020 Olegnax (http://olegnax.com/). All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+use Magento\Framework\Escaper;
+use Magento\Framework\View\Element\Template;
+use Olegnax\GoogleMap\Model\Data\Location as DataLocation;
+use Olegnax\GoogleMap\Model\Location;
+
+/** @var Template $block */
+/** @var Escaper $escaper */
+/** @var array $icon */
+/** @var Location $location */
+
+$viewBox = '0 0 ' . implode(' ', $icon['scaledSize']);
+$markerScale = $location->getMarkerSize();
+$markerSize = 70;
+$markerSize*=$markerScale;
+$innerScale = 0.7;
+$markerRadius = $markerSize / 2;
+$markerInnerRarius = (($markerSize*$innerScale)/2);
+$imagePosition = ($markerSize-($markerSize*$innerScale))/2;
+$image = $block->getData('widgetBlock')->contentLocalImage(DataLocation::MARKER_IMAGE, $location);
+?>
+<svg preserveaspectratio="xMidYMid meet" xml:space="preserve" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="<?= $viewBox ?>"> 
+<circle class="ox-marker-shape" cx="<?= $markerRadius ?>" cy="<?= $markerRadius ?>" r="<?= $markerRadius ?>" fill="<?= $location->getMarkerColor1() ?>" />
+<circle class="ox-marker-inner" cx="<?= $markerRadius ?>" cy="<?= $markerRadius ?>" r="<?= $markerInnerRarius ?>" fill="<?= $location->getMarkerColor2() ?>" />
+<?php if ($image): ?>
+	<defs>
+		<clipPath id="oxImageMask">
+			<circle cx="<?= $markerSize/2 ?>" cy="<?= $markerSize/2 ?>" r="<?= $markerInnerRarius ?>" fill="<?= $location->getMarkerColor2() ?>" />            
+		</clipPath>
+	</defs>
+	<image width="<?= $markerSize*$innerScale ?>" height="<?= $markerSize*$innerScale ?>" x="<?= $imagePosition ?>" y="<?= $imagePosition  ?>" xlink:href="data:image/jpeg;base64,<?= base64_encode($image) ?>" clip-path="url(#oxImageMask)" />
+<?php endif; ?>
+</svg>

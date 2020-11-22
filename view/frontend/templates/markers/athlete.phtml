@@ -1,0 +1,30 @@
+<?php
+/**
+ * @author      Olegnax
+ * @package     Olegnax_GoogleMap
+ * @copyright   Copyright (c) 2020 Olegnax (http://olegnax.com/). All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+use Magento\Framework\Escaper;
+use Magento\Framework\View\Element\Template;
+use Olegnax\GoogleMap\Model\Location;
+
+/** @var Template $block */
+/** @var Escaper $escaper */
+/** @var array $icon */
+/** @var Location $location */
+
+$viewBox = '0 0 ' . implode(' ', $icon['scaledSize']);
+$markerScale = $location->getMarkerSize();
+?>
+
+<svg data-name="athlete-marker" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+	 viewBox="<?= $viewBox ?>">
+	<circle fill="<?= $location->getMarkerColor1() ?>" cx="17" cy="17" r="17" transform="scale(<?=
+    $markerScale ?>)"/>
+	<circle fill="<?= $location->getMarkerColor2() ?>" cx="17" cy="17" r="6"
+			transform="scale(<?= $markerScale ?>)"/>
+	<polyline fill="<?= $location->getMarkerColor1() ?>" points="30.9 26.8 17.1 48.4 2.6 26"
+			  transform="scale(<?= $markerScale ?>)"/>
+</svg>

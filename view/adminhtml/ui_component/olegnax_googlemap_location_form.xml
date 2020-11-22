@@ -1,0 +1,293 @@
+<?xml version="1.0" ?>
+<!--suppress XmlDefaultAttributeValue -->
+<form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+	<argument name="data" xsi:type="array">
+		<item name="js_config" xsi:type="array">
+			<item name="provider" xsi:type="string">olegnax_googlemap_location_form.location_form_data_source</item>
+		</item>
+		<item name="label" translate="true" xsi:type="string">General Information</item>
+		<item name="template" xsi:type="string">templates/form/collapsible</item>
+	</argument>
+	<settings>
+		<buttons>
+			<button class="Olegnax\GoogleMap\Block\Adminhtml\Location\Edit\BackButton" name="back"/>
+			<button class="Olegnax\GoogleMap\Block\Adminhtml\Location\Edit\DeleteButton" name="delete"/>
+			<button class="Olegnax\GoogleMap\Block\Adminhtml\Location\Edit\SaveButton" name="save"/>
+			<button class="Olegnax\GoogleMap\Block\Adminhtml\Location\Edit\SaveAndContinueButton" name="save_and_continue"/>
+		</buttons>
+		<namespace>olegnax_googlemap_location_form</namespace>
+		<dataScope>data</dataScope>
+		<deps>
+			<dep>olegnax_googlemap_location_form.location_form_data_source</dep>
+		</deps>
+	</settings>
+	<dataSource name="location_form_data_source">
+		<argument name="data" xsi:type="array">
+			<item name="js_config" xsi:type="array">
+				<item name="component" xsi:type="string">Magento_Ui/js/form/provider</item>
+			</item>
+		</argument>
+		<settings>
+			<submitUrl path="*/*/save"/>
+		</settings>
+		<dataProvider class="Olegnax\GoogleMap\Model\Location\DataProvider" name="location_form_data_source">
+			<settings>
+				<requestFieldName>location_id</requestFieldName>
+				<primaryFieldName>location_id</primaryFieldName>
+			</settings>
+		</dataProvider>
+	</dataSource>
+	<fieldset name="general">
+		<settings>
+			<label>General</label>
+		</settings>
+		<field formElement="input" name="name" sortOrder="10">
+			<argument name="data" xsi:type="array">
+				<item name="config" xsi:type="array">
+					<item name="source" xsi:type="string">Location</item>
+				</item>
+			</argument>
+			<settings>
+				<dataType>text</dataType>
+				<label translate="true">Name</label>
+				<dataScope>name</dataScope>
+				<validation>
+					<rule name="required-entry" xsi:type="boolean">true</rule>
+				</validation>
+			</settings>
+		</field>
+		<field formElement="checkbox" name="status" sortOrder="20">
+			<argument name="data" xsi:type="array">
+				<item name="config" xsi:type="array">
+					<item name="source" xsi:type="string">Location</item>
+					<item name="default" xsi:type="number">1</item>
+				</item>
+			</argument>
+			<settings>
+				<dataType>boolean</dataType>
+				<label translate="true">Enable Location</label>
+				<dataScope>status</dataScope>
+
+			</settings>
+			<formElements>
+				<checkbox>
+					<settings>
+						<valueMap>
+							<map name="false" xsi:type="number">0</map>
+							<map name="true" xsi:type="number">1</map>
+						</valueMap>
+						<prefer>toggle</prefer>
+					</settings>
+				</checkbox>
+			</formElements>
+		</field>
+		<field name="store_views" formElement="multiselect" class="Magento\Store\Ui\Component\Form\Field\StoreView"
+			   sortOrder="22">
+			<argument name="data" xsi:type="array">
+				<item name="config" xsi:type="array">
+					<item name="source" xsi:type="string">block</item>
+					<item name="default" xsi:type="number">0</item>
+				</item>
+			</argument>
+			<settings>
+				<validation>
+					<rule name="required-entry" xsi:type="boolean">true</rule>
+				</validation>
+				<dataType>int</dataType>
+				<tooltip>
+					<link>https://docs.magento.com/m2/ce/user_guide/configuration/scope.html</link>
+					<description>What is this?</description>
+				</tooltip>
+				<label translate="true">Store View</label>
+				<dataScope>store_id</dataScope>
+			</settings>
+			<formElements>
+				<multiselect>
+					<settings>
+						<options class="Magento\Cms\Ui\Component\Listing\Column\Cms\Options"/>
+					</settings>
+				</multiselect>
+			</formElements>
+		</field>
+		<field formElement="input" name="latitude" sortOrder="30">
+			<argument name="data" xsi:type="array">
+				<item name="config" xsi:type="array">
+					<item name="source" xsi:type="string">Location</item>
+				</item>
+			</argument>
+			<settings>
+				<dataType>text</dataType>
+				<label translate="true">Latitude</label>
+				<dataScope>latitude</dataScope>
+				<validation>
+					<rule name="required-entry" xsi:type="boolean">true</rule>
+					<rule name="validate-number" xsi:type="boolean">true</rule>
+				</validation>
+			</settings>
+		</field>
+		<field formElement="input" name="longitude" sortOrder="32">
+			<argument name="data" xsi:type="array">
+				<item name="config" xsi:type="array">
+					<item name="source" xsi:type="string">Location</item>
+				</item>
+			</argument>
+			<settings>
+				<dataType>text</dataType>
+				<label translate="true">Longitude</label>
+				<dataScope>longitude</dataScope>
+				<validation>
+					<rule name="required-entry" xsi:type="boolean">true</rule>
+					<rule name="validate-number" xsi:type="boolean">true</rule>
+				</validation>
+			</settings>
+		</field>
+		<field formElement="select" name="marker_style" sortOrder="40">
+			<argument name="data" xsi:type="array">
+				<item name="config" xsi:type="array">
+					<item name="source" xsi:type="string">Location</item>
+				</item>
+			</argument>
+			<settings>
+				<dataType>text</dataType>
+				<label translate="true">Marker Style</label>
+				<dataScope>marker_style</dataScope>
+				<validation>
+					<rule name="required-entry" xsi:type="boolean">false</rule>
+				</validation>
+			</settings>
+			<formElements>
+				<select>
+					<settings>
+						<options class="Olegnax\GoogleMap\Model\Config\Source\MarkerStyle"/>
+					</settings>
+				</select>
+			</formElements>
+		</field>
+		<field formElement="input" name="marker_image" sortOrder="42">
+			<argument name="data" xsi:type="array">
+				<item name="config" xsi:type="array">
+					<item name="source" xsi:type="string">Location</item>
+				</item>
+			</argument>
+			<settings>
+				<dataType>text</dataType>
+				<label translate="true">Custom Marker Image</label>
+				<dataScope>marker_image</dataScope>
+				<validation>
+					<rule name="required-entry" xsi:type="boolean">false</rule>
+				</validation>
+				<tooltip>
+					<description>
+						Set url to map pin image. E.g.: "images/map_pin.png" will
+						link to images folder in your current theme.
+
+						For athlete2 theme full path will be:
+						app\design\frontend\Olegnax\athlete2\web\images.
+
+						To use images from Google Map Module write
+						following: Olegnax_GoogleMap::images/marker.png.
+
+						Full path will be:
+						app\code\Olegnax\GoogleMap\images\marker.png
+					</description>
+				</tooltip>
+			</settings>
+		</field>
+		<field formElement="input" name="marker_size" sortOrder="44">
+			<argument name="data" xsi:type="array">
+				<item name="config" xsi:type="array">
+					<item name="source" xsi:type="string">Location</item>
+				</item>
+			</argument>
+			<settings>
+				<dataType>text</dataType>
+				<label translate="true">Marker Scale</label>
+				<dataScope>marker_size</dataScope>
+				<validation>
+					<rule name="required-entry" xsi:type="boolean">false</rule>
+					<rule name="validate-number" xsi:type="boolean">true</rule>
+				</validation>
+				<tooltip>
+					<description>Default is 1. You can adjust pin size by adding multiplier. E.g.: Set value to 2 to
+						double the size of the marker or 0.5 to halve the marker size.
+					</description>
+				</tooltip>
+			</settings>
+		</field>
+		<field formElement="colorPicker" name="marker_color_1" sortOrder="46">
+			<argument name="data" xsi:type="array">
+				<item name="config" xsi:type="array">
+					<item name="source" xsi:type="string">Location</item>
+				</item>
+			</argument>
+			<settings>
+				<dataType>text</dataType>
+				<label translate="true">Marker Main Color (Background)</label>
+				<dataScope>marker_color_1</dataScope>
+				<validation>
+					<rule name="required-entry" xsi:type="boolean">false</rule>
+				</validation>
+				<imports>
+					<link name="visible">${ $.parentName }.marker_style == 'custom'</link>
+				</imports>
+			</settings>
+		</field>
+		<field formElement="colorPicker" name="marker_color_2" sortOrder="48">
+			<argument name="data" xsi:type="array">
+				<item name="config" xsi:type="array">
+					<item name="source" xsi:type="string">Location</item>
+				</item>
+			</argument>
+			<settings>
+				<dataType>text</dataType>
+				<label translate="true">Marker Second Color (Inner circle or dot)</label>
+				<dataScope>marker_color_2</dataScope>
+				<validation>
+					<rule name="required-entry" xsi:type="boolean">false</rule>
+				</validation>
+			</settings>
+		</field>
+		<field formElement="colorPicker" name="marker_shadow_color" sortOrder="54">
+			<argument name="data" xsi:type="array">
+				<item name="config" xsi:type="array">
+					<item name="source" xsi:type="string">Location</item>
+				</item>
+			</argument>
+			<settings>
+				<dataType>text</dataType>
+				<label translate="true">Marker Shadow Color</label>
+				<dataScope>marker_shadow_color</dataScope>
+				<validation>
+					<rule name="required-entry" xsi:type="boolean">false</rule>
+				</validation>
+			</settings>
+		</field>
+		<field formElement="wysiwyg" name="description" sortOrder="200">
+			<argument name="data" xsi:type="array">
+				<item name="config" xsi:type="array">
+					<item name="source" xsi:type="string">Location</item>
+					<item name="wysiwygConfigData" xsi:type="array">
+						<item name="add_variables" xsi:type="boolean">false</item>
+						<item name="add_widgets" xsi:type="boolean">false</item>
+						<item name="add_images" xsi:type="boolean">true</item>
+						<item name="add_directives" xsi:type="boolean">false</item>
+					</item>
+				</item>
+			</argument>
+			<settings>
+				<additionalClasses>
+					<class name="admin__field-wide">true</class>
+				</additionalClasses>
+				<label translate="true">Description</label>
+				<dataScope>description</dataScope>
+			</settings>
+			<formElements>
+				<wysiwyg>
+					<settings>
+						<wysiwyg>true</wysiwyg>
+					</settings>
+				</wysiwyg>
+			</formElements>
+		</field>
+	</fieldset>
+</form>

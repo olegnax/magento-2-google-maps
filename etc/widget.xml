@@ -1,0 +1,54 @@
+<?xml version="1.0" ?>
+<!--suppress XmlDefaultAttributeValue -->
+<widgets xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Widget:etc/widget.xsd">
+	<widget class="Olegnax\GoogleMap\Block\Widget\GoogleMap" id="olegnax_googlemap">
+		<label>Olegnax - Google Map</label>
+		<description>GoogleMap</description>
+		<parameters>
+			<parameter name="locations" sort_order="10" source_model="Olegnax\GoogleMap\Model\Config\Source\Location"
+					   visible="true" xsi:type="multiselect">
+				<label translate="true">locations</label>
+				<description translate="true">Locations can be set in Olegnax / Google Map : Location</description>
+			</parameter>
+			<parameter name="latitude" sort_order="20" visible="true" xsi:type="text">
+				<label translate="true">Map Center Latitude</label>
+				<description translate="true">Set center position of map. If empty, center will be calculated as the
+					average point of selected locations on map points.
+				</description>
+			</parameter>
+			<parameter name="longitude" sort_order="22" visible="true" xsi:type="text">
+				<label translate="true">Map Center Longitude</label>
+				<description translate="true">Set center position of map. If empty, center will be calculated as the
+					average point of selected locations on map points.
+				</description>
+			</parameter>
+			<parameter name="height" sort_order="30" visible="true" xsi:type="text">
+				<label translate="true">Map Height</label>
+			</parameter>
+			<parameter name="height_tablet" sort_order="32" visible="true" xsi:type="text">
+				<label translate="true">Map Height Tablet</label>
+				<description translate="true">Below 1024px</description>
+			</parameter>
+			<parameter name="height_mobile" sort_order="34" visible="true" xsi:type="text">
+				<label translate="true">Map Height Mobile</label>
+				<description translate="true">Below 768px</description>
+			</parameter>
+			<parameter name="zoom" sort_order="40" visible="true" xsi:type="text">
+				<label translate="true">Zoom</label>
+			</parameter>
+			<parameter name="zoom_mobile" sort_order="42" visible="true" xsi:type="text">
+				<label translate="true">Zoom on Mobile</label>
+				<description translate="true">Below 768px</description>
+			</parameter>
+			<parameter name="zoom_closer" sort_order="44" visible="true" xsi:type="text">
+				<label translate="true">Zoom on Marker Click</label>
+			</parameter>
+			<parameter name="map_type" sort_order="52" source_model="Olegnax\GoogleMap\Model\Config\Source\MapTypeWidget" visible="true" xsi:type="select">
+				<label translate="true">Map Type</label>
+			</parameter>
+			<parameter name="street_view" sort_order="54" source_model="Olegnax\GoogleMap\Model\Config\Source\YesNo" visible="true" xsi:type="select">
+				<label translate="true">Show Street View Controls</label>
+			</parameter>
+		</parameters>
+	</widget>
+</widgets>

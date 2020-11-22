@@ -1,0 +1,14 @@
+<?xml version="1.0" ?>
+<!--
+  ~ @author      Olegnax
+  ~ @package     Olegnax_GoogleMap
+  ~ @copyright   Copyright (c) 2020 Olegnax (http://olegnax.com/). All rights reserved.
+  ~ See COPYING.txt for license details.
+  -->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Cache/etc/cache.xsd">
+	<type instance="Olegnax\GoogleMap\Model\Cache\GoogleMapLocations" name="ox_googlemap_locations" translate="label,description">
+		<label>GoogleMap Locations</label>
+		<description>Olegnax GoogleMap Locations</description>
+	</type>
+</config>

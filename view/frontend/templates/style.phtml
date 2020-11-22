@@ -1,0 +1,82 @@
+<?php
+/**
+ * Olegnax GoogleMap Style
+ *
+ * @author      Olegnax
+ * @package     Olegnax_GoogleMap
+ * @copyright   Copyright (c) 2020 Olegnax (http://olegnax.com/). All rights reserved.
+ * See COPYING.txt for license details.
+ */
+declare(strict_types=1);
+
+use Magento\Framework\Escaper;
+use Magento\Framework\View\Element\Template;
+
+/** @var Template $block */
+/** @var Escaper $escaper */
+/** @var string $widgetId */
+$widgetId = $block->getData('widgetId');
+/** @var array $appearance */
+$appearance = $block->getData('appearance');
+/** @var array $general */
+$general = $block->getData('general');
+if ($appearance['custom_styles']):
+
+    $popBg = $appearance['popup_background'];
+    $popColor = $appearance['popup_color'];
+    $shadowParams = $appearance['popup_shadow'];
+    $shadowColor = $appearance['popup_shadow_color'];
+    $popBorderRadius = $appearance['popup_border_radius'];
+
+    if ($appearance['popup_max_width']):?>
+		#<?= $widgetId ?> .ox-gmap-popup { max-width: <?= $appearance['popup_max_width'] ?>px }
+    <?php endif; ?>
+	<?php if ($popBg || $popColor): ?>
+		.poi-info-window div, 
+		.poi-info-window a {
+			<?php if ($popColor): ?>
+			color: <?= $popColor ?>!important;
+			<?php endif; ?>
+			<?php if ($popBg): ?>
+			background-color: <?= $popBg ?>!important;
+			<?php endif; ?>		
+		}
+	<?php endif; ?>
+    <?php if ($popBg || $popColor || $shadowParams || $shadowColor || $popBorderRadius): ?>
+		#<?= $widgetId ?> .gm-style .gm-style-iw-c {
+		<?php if ($popBg): ?>
+			background-color: <?= $popBg ?>!important;
+			<?php endif; ?>
+			<?php if ($popColor): ?>
+			color: <?= $popColor ?>!important;
+			<?php endif; ?>		
+			<?php if ($popBorderRadius !== ''): ?>
+			border-radius: <?= $popBorderRadius ?>px!important;
+			<?php endif; ?>		
+			<?php if ($shadowParams || $shadowColor) : ?>
+				box-shadow: <?= ($shadowParams ?: '0 2px 7px 1px') . ' ' . ($shadowColor ?: 'rgba(0,0,0,0.33)') ?>!important;
+			<?php endif; ?>
+		}
+    <?php endif; ?>
+    <?php if ($popBg): ?>
+	#<?= $widgetId ?> .gm-style .gm-style-iw-t::after { background: linear-gradient(45deg,<?= $popBg ?> 50%,rgba(255,255,255,0) 51%,rgba(255,255,255,0) 100%);!important; }
+<?php endif;
+    if ($appearance['popup_bottom_arrow_hide']): ?>
+		#<?= $widgetId ?> .gm-style .gm-style-iw-t::after { content: none!important; }
+    <?php endif;
+    if ($appearance['popup_close_btn_bg']):?>
+		#<?= $widgetId ?> .gm-style .gm-style-iw-c > button  { opacity:1!important; background-color: <?= $appearance['popup_close_btn_bg'] ?>!important; }
+    <?php endif;
+    if ($appearance['popup_close_btn_invert']):?>
+		#<?= $widgetId ?> .gm-style .gm-style-iw-c > button > img { filter: invert(1)!important; }
+    <?php endif;
+endif;
+if ($general['height']): ?>
+	#<?= $widgetId ?>.ox-gmap-wrapper{ height: <?= $general['height'] ?>px }
+<?php endif;
+if ($general['height_tablet']): ?>
+	@media (max-width: 1024px) {#<?= $widgetId ?>.ox-gmap-wrapper{ height: <?= $general['height_tablet'] ?>px }}
+<?php endif;
+if ($general['height_mobile']): ?>
+	@media (max-width: 768px) {#<?= $widgetId ?>.ox-gmap-wrapper{ height: <?= $general['height_mobile'] ?>px }}
+<?php endif;

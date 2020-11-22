@@ -1,0 +1,49 @@
+// /**
+//  * Copyright (c) Olegnax (http://olegnax.com/). All rights reserved.
+//  */
+
+//
+//  Common
+//  _____________________________________________
+
+& when (@media-common = true) {
+  .ox-gmap-popup {
+	max-width: @ox-gmap__popup--max-width;
+	padding: @ox-gmap__popup--padding;
+  }
+
+  .ox-gmap-popup > *:last-child {
+	margin-bottom: 0;
+  }
+
+  .ox-gmap-wrapper {
+	width: @ox-gmap--width;
+	height: @ox-gmap--height;
+  }
+
+  .gm-style .gm-style-iw .ox-gmap-popup {
+	font-weight: @ox-gmap__popup--font-weight;
+	font-size: @ox-gmap__popup--font-size;
+  }
+
+  .ox-gmap-wrapper .gm-style .gm-style-iw-c {
+	padding-bottom:12px!important;
+
+	> button {
+	  top: 0px !important;
+	  right: 0px !important;
+          box-shadow:none;
+          border-radius:0;
+          border:none;
+	  > img {
+		width: 22px !important;
+		height: 22px !important;
+		margin: 4px !important;
+	  }
+	}
+  }
+
+  .ox-gmap-wrapper .gm-style-iw-d {
+	overflow: auto !important;
+  }
+}

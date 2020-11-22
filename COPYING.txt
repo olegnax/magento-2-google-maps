@@ -1,0 +1,9 @@
+Copyright © 2020 Olegnax (http://olegnax.com/)
+
+Each Olegnax GoogleMap extension source file included in this distribution is licensed under OSL 3.0 or the Olegnax Proprietary License.
+
+http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+Please see LICENSE.txt for the full text of the OSL 3.0 license or contact maile@olegnax.com for a copy.
+
+Subject to Licensee's payment of fees and compliance with the terms and conditions of the Olegnax Proprietary License, the Olegnax Proprietary License supersedes the OSL 3.0 license for each source file.
+Please visit https://olegnax.com/license/ for the full text of the Olegnax Proprietary License.

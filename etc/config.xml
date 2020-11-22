@@ -1,0 +1,36 @@
+<?xml version="1.0" ?>
+<!--suppress CheckTagEmptyBody -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+	<default>
+		<olegnax_googlemaps>
+			<general>
+				<enabled>1</enabled>
+				<google_api_key></google_api_key>
+				<locations></locations>
+				<center_lat></center_lat>
+				<center_long></center_long>
+				<height></height>
+				<height_tablet></height_tablet>
+				<height_mobile></height_mobile>
+				<zoom>7</zoom>
+				<zoom_mobile>6</zoom_mobile>
+				<zoom_closer></zoom_closer>
+				<map_type></map_type>
+				<street_view>0</street_view>
+				<mobile_breakpoint>768</mobile_breakpoint>
+			</general>
+			<appearance>
+				<custom_styles>1</custom_styles>
+				<popup_max_width></popup_max_width>
+				<popup_background></popup_background>
+				<popup_color></popup_color>
+				<popup_border_radius></popup_border_radius>
+				<popup_shadow></popup_shadow>
+				<popup_shadow_color></popup_shadow_color>
+				<popup_bottom_arrow_hide></popup_bottom_arrow_hide>
+				<popup_close_btn_bg></popup_close_btn_bg>
+				<popup_close_btn_invert></popup_close_btn_invert>
+			</appearance>
+		</olegnax_googlemaps>
+	</default>
+</config>

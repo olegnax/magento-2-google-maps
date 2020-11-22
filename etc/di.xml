@@ -1,0 +1,22 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+	<preference for="Olegnax\GoogleMap\Api\LocationRepositoryInterface" type="Olegnax\GoogleMap\Model\LocationRepository"/>
+	<preference for="Olegnax\GoogleMap\Api\Data\LocationInterface" type="Olegnax\GoogleMap\Model\Data\Location"/>
+	<preference for="Olegnax\GoogleMap\Api\Data\LocationSearchResultsInterface" type="Magento\Framework\Api\SearchResults"/>
+	<virtualType name="Olegnax\GoogleMap\Model\ResourceModel\Location\Grid\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+		<arguments>
+			<argument name="mainTable" xsi:type="string">olegnax_googlemap_location</argument>
+			<argument name="resourceModel" xsi:type="string">Olegnax\GoogleMap\Model\ResourceModel\Location\Collection
+			</argument>
+		</arguments>
+	</virtualType>
+	<type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+		<arguments>
+			<argument name="collections" xsi:type="array">
+				<item name="olegnax_googlemap_location_listing_data_source" xsi:type="string">
+					Olegnax\GoogleMap\Model\ResourceModel\Location\Grid\Collection
+				</item>
+			</argument>
+		</arguments>
+	</type>
+</config>

@@ -1,0 +1,15 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+	<menu>
+		<add id="Olegnax_GoogleMap::top_level" title="Google Map" translate="title"
+			 module="Olegnax_GoogleMap" sortOrder="260" parent="Olegnax_Core::Olegnax_Core"
+			 resource="Olegnax_GoogleMap::config"/>
+		<add action="olegnax_googlemap/location/index" id="Olegnax_GoogleMap::olegnax_googlemap_location"
+			 module="Olegnax_GoogleMap" parent="Olegnax_GoogleMap::top_level" resource="Magento_Backend::content"
+			 sortOrder="10" title="Location"/>
+		<add id="Olegnax_GoogleMap::config" title="Configuration" translate="title"
+			 module="Olegnax_GoogleMap" sortOrder="20"
+			 action="adminhtml/system_config/edit/section/olegnax_googlemaps"
+			 parent="Olegnax_GoogleMap::top_level" resource="Olegnax_GoogleMap::config_olegnax_googlemap"/>
+	</menu>
+</config>

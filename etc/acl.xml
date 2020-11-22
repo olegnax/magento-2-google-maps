@@ -1,0 +1,20 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Acl/etc/acl.xsd">
+	<acl>
+		<resources>
+			<resource id="Magento_Backend::admin">
+				<resource id="Olegnax_Core::Olegnax_Core">
+					<resource id="Olegnax_GoogleMap::top_level" sortOrder="10" title="GoogleMap">
+						<resource id="Olegnax_GoogleMap::Location" sortOrder="10" title="Location">
+							<resource id="Olegnax_GoogleMap::Location_save" sortOrder="10" title="Save Location"/>
+							<resource id="Olegnax_GoogleMap::Location_delete" sortOrder="20" title="Delete Location"/>
+							<resource id="Olegnax_GoogleMap::Location_update" sortOrder="30" title="Update Location"/>
+							<resource id="Olegnax_GoogleMap::Location_view" sortOrder="40" title="View Location"/>
+						</resource>
+						<resource id="Olegnax_GoogleMap::config_olegnax_googlemap" sortOrder="20" title="Configuration"/>
+					</resource>
+				</resource>
+			</resource>
+		</resources>
+	</acl>
+</config>
