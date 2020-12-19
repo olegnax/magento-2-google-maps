@@ -81,7 +81,7 @@
 				</checkbox>
 			</formElements>
 		</field>
-		<field name="store_views" formElement="multiselect" class="Magento\Store\Ui\Component\Form\Field\StoreView"
+		<field name="store_views" formElement="multiselect" class="Olegnax\GoogleMap\Ui\Component\Form\Field\StoreView"
 			   sortOrder="22">
 			<argument name="data" xsi:type="array">
 				<item name="config" xsi:type="array">

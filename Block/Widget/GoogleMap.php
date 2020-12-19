@@ -24,8 +24,8 @@ use Magento\Tests\NamingConvention\true\mixed;
 use Magento\Widget\Block\BlockInterface;
 use Olegnax\GoogleMap\Helper\Cache;
 use Olegnax\GoogleMap\Helper\Helper;
-use Olegnax\GoogleMap\Model\Config\Source\MarkerStyle;
 use Olegnax\GoogleMap\Model\Config\Source\MapStyle;
+use Olegnax\GoogleMap\Model\Config\Source\MarkerStyle;
 use Olegnax\GoogleMap\Model\Data\Location as DataLocation;
 use Olegnax\GoogleMap\Model\Location;
 use Olegnax\GoogleMap\Model\ResourceModel\Location\Collection;
@@ -69,6 +69,10 @@ class GoogleMap extends Template implements BlockInterface
      * @var Cache
      */
     protected $cacheHelper;
+    /**
+     * @var MapStyle
+     */
+    protected $mapStyle;
 
     /**
      * GoogleMap constructor.
@@ -90,6 +94,7 @@ class GoogleMap extends Template implements BlockInterface
         Helper $helper,
         Cache $cacheHelper,
         MarkerStyle $markerStyle,
+        MapStyle $mapStyle,
         array $data = [],
         Json $json = null,
         Escaper $escaper = null
@@ -100,6 +105,7 @@ class GoogleMap extends Template implements BlockInterface
         $this->helper = $helper;
         $this->cacheHelper = $cacheHelper;
         $this->markerStyle = $markerStyle;
+        $this->mapStyle = $mapStyle;
         $this->json = $json ?: ObjectManager::getInstance()->get(Json::class);
         $this->escaper = $escaper ?: ObjectManager::getInstance()->get(Escaper::class);
     }
@@ -254,10 +260,10 @@ class GoogleMap extends Template implements BlockInterface
                 'mapTypeIds' => [],
             ],
         ];
-		$locations = null;
-		if($this->getData('locations')){
-			$locations = trim($this->getData('locations'));
-		}
+        $locations = null;
+        if ($this->getData('locations')) {
+            $locations = trim($this->getData('locations'));
+        }
         if (empty($locations)) {
             $locations = $this->helper->getModuleConfig('general/locations', $storeCode);
         }
@@ -288,7 +294,11 @@ class GoogleMap extends Template implements BlockInterface
             }
         }
 
-        return $this->json->serialize($config);
+        $module = $this->helper->isLegacyJQuery() ? 'OXGoogleMapLegacy' : 'OXGoogleMap';
+        $_config = [];
+        $_config[$module] = $config;
+
+        return $this->json->serialize($_config);
     }
 
     /**
@@ -320,14 +330,14 @@ class GoogleMap extends Template implements BlockInterface
      */
     protected function getMapStyles($storeCode = null)
     {
-        $value = $this->getData('custom_css');		
+        $value = $this->getData('custom_css');
         if (null === $value) {
-			$map_style = $this->helper->getModuleConfig('appearance/map_style', $storeCode);
-			if($map_style === MapStyle::TYPE_CUSTOM){
-				$value = $this->helper->getModuleConfig('appearance/custom_json', $storeCode);
-			} else {
-				$value = $map_style;
-			}
+            $map_style = $this->helper->getModuleConfig('appearance/map_style', $storeCode);
+            if ($map_style === MapStyle::TYPE_CUSTOM) {
+                $value = $this->helper->getModuleConfig('appearance/custom_json', $storeCode);
+            } else {
+                $value = $this->mapStyle->getStyle($map_style);
+            }
         }
         if (null === $value) {
             $value = '[]';

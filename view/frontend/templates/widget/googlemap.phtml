@@ -20,6 +20,5 @@ if ($block->isEnabled()):
     echo $block->getStyle($widgetId);
     ?>
 	<div id="<?= $escaper->escapeHtmlAttr($widgetId); ?>" class="ox-gmap-wrapper" data-role="ox-google-map"
-		 data-mage-init='{"OXGoogleMap":<?=
-         $block->getWidgetConfig() ?>}'></div>
+		 data-mage-init='<?= $block->getWidgetConfig() ?>'></div>
 <?php endif;
