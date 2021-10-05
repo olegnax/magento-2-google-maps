@@ -143,6 +143,7 @@
 				</field>
 				<field id="popup_max_width" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
 					<label>Popup Max Width</label>
+                                        <validate>validate-digits validate-zero-or-greater</validate>
 					<depends>
 						<field id="custom_styles">1</field>
 						<field id="general/enabled">1</field>
@@ -167,6 +168,7 @@
 				</field>
 				<field id="popup_border_radius" translate="label" type="text" sortOrder="26" showInDefault="1" showInWebsite="1" showInStore="1">
 					<label>Popup Border Radius</label>
+                                        <validate>validate-digits validate-zero-or-greater</validate>
 					<depends>
 						<field id="custom_styles">1</field>
 						<field id="general/enabled">1</field>
