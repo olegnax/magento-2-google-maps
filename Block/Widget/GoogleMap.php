@@ -280,7 +280,7 @@ class GoogleMap extends Template implements BlockInterface
                             'lng' => (float)$location->getData(DataLocation::LONGITUDE),
                         ],
                         'icon' => $this->getMarker($location),
-                        'title' => $location->getData(DataLocation::NAME),
+                        'title' => $this->escaper->escapeHtmlAttr($location->getData(DataLocation::NAME)),
                         'description' => $this->helper->getBlockTemplateProcessor(
                             $this->disabledLazy(
                                 $location->getData(DataLocation::DESCRIPTION)
