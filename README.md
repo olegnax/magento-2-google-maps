@@ -48,7 +48,7 @@ https://athlete2.com/landing/
 
 ## Compatibilty
 
-Tested with Magento 2 Open Source 2.3.x - 2.4.1
+Tested with Magento 2 Open Source 2.3.x - 2.4.3
 
 ## Requirements
 
