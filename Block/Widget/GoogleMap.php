@@ -370,7 +370,7 @@ class GoogleMap extends Template implements BlockInterface
             ->addFieldToSelect('*')
             ->addFieldToFilter('location_id', ['in' => $locations])
             ->addFieldToFilter('status', '1')
-            ->addStoreFilter($store ? $this->_storeManager->getStore($store) : null);
+            ->addStoreFilter($store ? $this->_storeManager->getStore($store) : '0');
     }
 
     /**
@@ -406,7 +406,7 @@ class GoogleMap extends Template implements BlockInterface
      */
     private function disabledLazy($html)
     {
-        return preg_replace('#<img #i', '<img data-ox-image ', $html?:'');
+        return preg_replace('#<img #i', '<img data-ox-image ', $html ?: '');
     }
 
     /**
