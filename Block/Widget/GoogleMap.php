@@ -20,7 +20,6 @@ use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Framework\Serialize\Serializer\Json;
 use Magento\Framework\View\Element\Template;
 use Magento\Store\Api\Data\StoreInterface;
-use Magento\Tests\NamingConvention\true\mixed;
 use Magento\Widget\Block\BlockInterface;
 use Olegnax\GoogleMap\Helper\Cache;
 use Olegnax\GoogleMap\Helper\Helper;
@@ -407,7 +406,7 @@ class GoogleMap extends Template implements BlockInterface
      */
     private function disabledLazy($html)
     {
-        return preg_replace('#<img #i', '<img data-ox-image ', $html);
+        return preg_replace('#<img #i', '<img data-ox-image ', $html?:'');
     }
 
     /**
