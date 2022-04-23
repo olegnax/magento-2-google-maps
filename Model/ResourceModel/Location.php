@@ -36,6 +36,9 @@ class Location extends AbstractDb
     protected function _beforeSave(AbstractModel $object)
     {
         $data = $object->getData('store_id');
+        if (empty($data)) {
+            $data = [0];
+        }
         if (is_array($data)) {
             $data = implode(',', $data);
             $object->setData('store_id', $data);
