@@ -338,7 +338,7 @@ class GoogleMap extends Template implements BlockInterface
                 $value = $this->mapStyle->getStyle($map_style);
             }
         }
-        if (null === $value) {
+        if (empty($value)) {
             $value = '[]';
         }
         try {
