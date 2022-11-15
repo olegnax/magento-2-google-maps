@@ -2,7 +2,7 @@
   "name": "olegnax/module-googlemap",
   "description": "Easily add google map anywhere on your Magento 2 store",
   "type": "magento2-module",
-  "version": "1.1.1.4",
+  "version": "1.1.1.5",
   "license": [
       "OSL-3.0",
       "AFL-3.0"
